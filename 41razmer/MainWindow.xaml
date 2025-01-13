@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_41razmer"
         mc:Ignorable="d"
-        Title="Абдеев И. Р. Размер 41" Height="450" Width="800">
+        Title="Абдеев И. Р. Размер 41" Height="450" Width="800" MinHeight="450" MinWidth="800" Icon="res/icon.ico" FontFamily="Comic Sans MS">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
         
+        <Image Source="res/logo.png" HorizontalAlignment="Left"></Image>
+        <TextBlock Text="Обувь 41 размер" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <Button Content="Назад" Name="BtnBack" HorizontalAlignment="Right" Click="BtnBack_Click"></Button>
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1" ContentRendered="MainFrame_ContentRendered"></Frame>
+
     </Grid>
 </Window>
