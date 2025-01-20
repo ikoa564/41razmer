@@ -20,6 +20,7 @@ namespace _41razmer
     /// </summary>
     public partial class ProductPage : Page
     {
+        List<Product> Products = new List<Product>();
         List<Product> Tablelist;
         int CountRecords;
 
@@ -30,8 +31,6 @@ namespace _41razmer
             ProductListView.ItemsSource = currentProducts;
             ComboDiscount.SelectedIndex = 0;
             UpdateProduct();
-            CountRecords = Abdeev41Entities.GetContext().Product.ToList().Count;
-            TBAllRecords.Text = " из " + CountRecords.ToString();
         }
 
         private void UpdateProduct()
@@ -58,8 +57,15 @@ namespace _41razmer
                 ProductListView.ItemsSource = currentProducts.OrderByDescending(p => p.ProductCost).ToList();
             if (RBtnUp.IsChecked.Value)
                 ProductListView.ItemsSource = currentProducts.OrderBy(p => p.ProductCost).ToList();
+        }
 
-            TBCount.Text = currentProducts.Count.ToString();
+        private void PageCount()
+        {
+            CountRecords = Tablelist.Count;
+            int min = 1;
+
+            TBCount.Text = min.ToString();
+            TBAllRecords.Text = " из " + CountRecords.ToString();
         }
 
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)

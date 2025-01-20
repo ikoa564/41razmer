@@ -20,25 +20,18 @@ namespace _41razmer
     /// </summary>
     public partial class ProductPage : Page
     {
-        List<Product> Tablelist;
-        int CountRecords;
-
         public ProductPage()
         {
             InitializeComponent();
             var currentProducts = Abdeev41Entities.GetContext().Product.ToList();
             ProductListView.ItemsSource = currentProducts;
             ComboDiscount.SelectedIndex = 0;
-            UpdateProduct();
-            CountRecords = Abdeev41Entities.GetContext().Product.ToList().Count;
-            TBAllRecords.Text = " из " + CountRecords.ToString();
+            UpdateProduct()
         }
 
         private void UpdateProduct()
         {
             var currentProducts = Abdeev41Entities.GetContext().Product.ToList();
-
-
             if (ComboDiscount.SelectedIndex == 1)
             {
                 currentProducts = currentProducts.Where(p => p.ProductDiscountAmount >= 0 && p.ProductDiscountAmount < 10).ToList();
@@ -51,35 +44,33 @@ namespace _41razmer
             {
                 currentProducts = currentProducts.Where(p => p.ProductDiscountAmount >= 15).ToList();
             }
+
             currentProducts = currentProducts.Where(p => p.ProductName.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
-            ProductListView.ItemsSource = currentProducts.ToList();
 
             if (RBtnDown.IsChecked.Value)
                 ProductListView.ItemsSource = currentProducts.OrderByDescending(p => p.ProductCost).ToList();
             if (RBtnUp.IsChecked.Value)
                 ProductListView.ItemsSource = currentProducts.OrderBy(p => p.ProductCost).ToList();
-
-            TBCount.Text = currentProducts.Count.ToString();
         }
 
         private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateProduct();
+            UpdateProduct()
         }
 
         private void RBtnUp_Checked(object sender, RoutedEventArgs e)
         {
-            UpdateProduct();
+            UpdateProduct()
         }
 
         private void RBtnDown_Checked(object sender, RoutedEventArgs e)
         {
-            UpdateProduct();
+            UpdateProduct()
         }
 
         private void ComboDiscount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateProduct();
+            UpdateProduct()
         }
 
 

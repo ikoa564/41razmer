@@ -17,8 +17,9 @@
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left">
             <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
                 <TextBlock Text="кол-во " FontSize="15"></TextBlock>
-                <TextBlock Name="TBCount" FontSize="15"></TextBlock>
-                <TextBlock Name="TBAllRecords" FontSize="15"></TextBlock>
+                <TextBlock Text="{}" FontSize="15"></TextBlock>
+                <TextBlock Text=" из " FontSize="15"></TextBlock>
+                <TextBlock Text="{}" FontSize="15"></TextBlock>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="10">

@@ -14,31 +14,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
                 <TextBlock Text="кол-во " FontSize="15"></TextBlock>
-                <TextBlock Name="TBCount" FontSize="15"></TextBlock>
-                <TextBlock Name="TBAllRecords" FontSize="15"></TextBlock>
-            </StackPanel>
+                <TextBlock Text="{}" FontSize="15"></TextBlock>
+                <TextBlock Text=" из " FontSize="15"></TextBlock>
+                <TextBlock Text="{}" FontSize="15"></TextBlock>
 
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="поиск по наименованию" Width="200" HorizontalAlignment="Center" FontSize="15"></TextBlock>
-                <TextBox Name="TBoxSearch" Width="200" TextChanged="TBoxSearch_TextChanged" FontSize="15"></TextBox>
-            </StackPanel>
-
-            <StackPanel Orientation="Vertical" Margin="10">
-                <RadioButton Content="по возврастанию стоимости" GroupName="Sort" Width="230" FontSize="15" Checked="RBtnUp_Checked"  Name="RBtnUp"></RadioButton>
-                <RadioButton Content="по убыванию стоимости" GroupName="Sort" Width="230" FontSize="15" Checked="RBtnDown_Checked"  Name="RBtnDown"></RadioButton>
-            </StackPanel>
-
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Text="поиск по наименованию" FontSize="15"></TextBlock>
-                <ComboBox Name="ComboDiscount" SelectionChanged="ComboDiscount_SelectionChanged" FontSize="15" Width="200">
-                    <TextBlock>Без сортировки</TextBlock>
-                    <TextBlock>0-10%</TextBlock>
-                    <TextBlock>10-15%</TextBlock>
-                    <TextBlock>>15%</TextBlock>
-                </ComboBox>
             </StackPanel>
         </WrapPanel>
 
