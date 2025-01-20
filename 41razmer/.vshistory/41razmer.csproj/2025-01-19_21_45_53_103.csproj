@@ -175,16 +175,6 @@
       <DependentUpon>ModelAbdeev.edmx</DependentUpon>
       <LastGenOutput>ModelAbdeev.cs</LastGenOutput>
     </Content>
-    <Resource Include="tovar\B320R5.jpg" />
-    <Resource Include="tovar\D329H3.jpg" />
-    <Resource Include="tovar\D572U8.jpg" />
-    <Resource Include="tovar\F572H7.jpg" />
-    <Resource Include="tovar\F635R4.jpg" />
-    <Resource Include="tovar\G432E4.jpg" />
-    <Resource Include="tovar\G783F5.jpg" />
-    <Resource Include="tovar\H782T5.jpg" />
-    <Resource Include="tovar\J384T6.jpg" />
-    <Resource Include="tovar\А112Т4.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

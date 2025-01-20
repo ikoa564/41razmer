@@ -15,8 +15,8 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="700"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="400"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
@@ -41,7 +41,7 @@
                         <TextBlock Text="{Binding ProductDescription}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="20"></TextBlock>
                         <TextBlock Text="{Binding ProductManufacturer}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" FontSize="20"></TextBlock>
                         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding ProductCost, StringFormat={}{0:0}}"  FontSize="20"></TextBlock>
+                            <TextBlock Text="{Binding ProductCost}"  FontSize="20"></TextBlock>
                             <TextBlock Text=" рублей" FontSize="20"></TextBlock>
                         </StackPanel>
 

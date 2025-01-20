@@ -23,13 +23,11 @@ namespace _41razmer
         public ProductPage()
         {
             InitializeComponent();
-            var currentProducts = Abdeev41Entities.GetContext().Product.ToList();
-            ProductListView.ItemsSource = currentProducts;
         }
 
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Manager.MainFrame.Navigate(new AddEditPage());
-        //}
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new AddEditPage());
+        }
     }
 }
