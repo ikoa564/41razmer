@@ -64,37 +64,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AbdeevModel.cs">
+    <Compile Include="ModelAbdeev.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AbdeevModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AuthPage.xaml.cs">
-      <DependentUpon>AuthPage.xaml</DependentUpon>
+      <DependentUpon>ModelAbdeev.tt</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
-      <DependentUpon>AbdeevModel.tt</DependentUpon>
+      <DependentUpon>ModelAbdeev.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderProduct.cs">
-      <DependentUpon>AbdeevModel.tt</DependentUpon>
+      <DependentUpon>ModelAbdeev.tt</DependentUpon>
     </Compile>
     <Compile Include="PickUpPoint.cs">
-      <DependentUpon>AbdeevModel.tt</DependentUpon>
+      <DependentUpon>ModelAbdeev.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>AbdeevModel.tt</DependentUpon>
+      <DependentUpon>ModelAbdeev.tt</DependentUpon>
     </Compile>
     <Compile Include="Role.cs">
-      <DependentUpon>AbdeevModel.tt</DependentUpon>
+      <DependentUpon>ModelAbdeev.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>AbdeevModel.tt</DependentUpon>
+      <DependentUpon>ModelAbdeev.tt</DependentUpon>
     </Compile>
     <Page Include="AddEditPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AuthPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,16 +95,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AbdeevModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AbdeevModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AbdeevModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AbdeevModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="AddEditPage.xaml.cs">
       <DependentUpon>AddEditPage.xaml</DependentUpon>
     </Compile>
@@ -130,6 +113,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Manager.cs" />
+    <Compile Include="ModelAbdeev.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelAbdeev.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelAbdeev.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelAbdeev.edmx</DependentUpon>
+    </Compile>
     <Compile Include="ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
@@ -150,12 +143,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="AbdeevModel.edmx">
+    <EntityDeploy Include="ModelAbdeev.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AbdeevModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelAbdeev.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="AbdeevModel.edmx.diagram">
-      <DependentUpon>AbdeevModel.edmx</DependentUpon>
+    <None Include="ModelAbdeev.edmx.diagram">
+      <DependentUpon>ModelAbdeev.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -172,6 +165,16 @@
     <Resource Include="res\picture.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ModelAbdeev.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelAbdeev.Context.cs</LastGenOutput>
+      <DependentUpon>ModelAbdeev.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModelAbdeev.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelAbdeev.edmx</DependentUpon>
+      <LastGenOutput>ModelAbdeev.cs</LastGenOutput>
+    </Content>
     <Resource Include="tovar\B320R5.jpg" />
     <Resource Include="tovar\D329H3.jpg" />
     <Resource Include="tovar\D572U8.jpg" />
@@ -185,18 +188,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="AbdeevModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AbdeevModel.edmx</DependentUpon>
-      <LastGenOutput>AbdeevModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="AbdeevModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AbdeevModel.edmx</DependentUpon>
-      <LastGenOutput>AbdeevModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

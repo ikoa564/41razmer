@@ -10,12 +10,12 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="90"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Right">
+        <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Left">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Name="BeforeFIOTB" Text="Вы авторизованы как " FontSize="15"></TextBlock>
                 <TextBlock Name="FIOTB" FontSize="15"></TextBlock>

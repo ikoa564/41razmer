@@ -23,7 +23,7 @@ namespace _41razmer
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new AuthPage());
+            MainFrame.Navigate(new ProductPage());
             Manager.MainFrame = MainFrame;
         }
 

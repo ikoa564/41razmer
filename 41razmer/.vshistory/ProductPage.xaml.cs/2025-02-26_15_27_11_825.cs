@@ -26,28 +26,7 @@ namespace _41razmer
         public ProductPage(User user)
         {
             InitializeComponent();
-            if (user != null)
-            {
-                FIOTB.Text = user.UserSurname + " " + user.UserName + " " + user.UserPatronymic;
-                switch (user.UserRole)
-                {
-                    case 1:
-                        RoleTB.Text = "Клиент";
-                        break;
-                    case 2:
-                        RoleTB.Text = "Менеджер";
-                        break;
-                    case 3:
-                        RoleTB.Text = "Администратор";
-                        break;
-                }
-            }
-            else
-            {
-                FIOTB.Text = "";
-                BeforeFIOTB.Text = "";
-                RoleTB.Text = "Гость";
-            }
+
             var currentProducts = Abdeev41Entities.GetContext().Product.ToList();
             ProductListView.ItemsSource = currentProducts;
             ComboDiscount.SelectedIndex = 0;

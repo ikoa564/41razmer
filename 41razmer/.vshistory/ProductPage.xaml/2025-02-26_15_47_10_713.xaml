@@ -10,20 +10,16 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="90"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Right">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Name="BeforeFIOTB" Text="Вы авторизованы как " FontSize="15"></TextBlock>
-                <TextBlock Name="FIOTB" FontSize="15"></TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Роль: " FontSize="15"></TextBlock>
-                <TextBlock Name="RoleTB" FontSize="15"></TextBlock>
-            </StackPanel>
+        <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Left">
+            <TextBlock Name="BeforeFIOTB" Text="Вы авторизованы как " FontSize="15"></TextBlock>
+            <TextBlock Name="FIOTB" FontSize="15"></TextBlock>
+            <TextBlock Text="Роль: " FontSize="15"></TextBlock>
+            <TextBlock Name="RoleTB" FontSize="15"></TextBlock>
         </StackPanel>
 
         <WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">

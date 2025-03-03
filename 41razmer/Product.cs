@@ -32,7 +32,7 @@ namespace _41razmer
         public int ProductQuantityInStock { get; set; }
         public string ProductDescription { get; set; }
         public string ProductPhoto { get; set; }
-
+        public string ProductStatus { get; set; }
         public string ProductPhotoString
         {
             get
@@ -44,8 +44,6 @@ namespace _41razmer
             }
         }
 
-        public string ProductStatus { get; set; }
-    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProduct> OrderProduct { get; set; }
     }

@@ -12,9 +12,10 @@ namespace _41razmer
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Runtime.Remoting.Contexts;
     public partial class Abdeev41Entities : DbContext
     {
+
         private static Abdeev41Entities _context;
         public static Abdeev41Entities GetContext()
         {
@@ -22,6 +23,8 @@ namespace _41razmer
                 _context = new Abdeev41Entities();
             return _context;
         }
+
+
         public Abdeev41Entities()
             : base("name=Abdeev41Entities")
         {

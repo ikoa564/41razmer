@@ -46,7 +46,7 @@ namespace _41razmer
             {
                 FIOTB.Text = "";
                 BeforeFIOTB.Text = "";
-                RoleTB.Text = "Гость";
+                RoleTB.Text = "Гость"
             }
             var currentProducts = Abdeev41Entities.GetContext().Product.ToList();
             ProductListView.ItemsSource = currentProducts;
