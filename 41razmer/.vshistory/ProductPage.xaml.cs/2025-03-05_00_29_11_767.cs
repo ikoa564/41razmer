@@ -175,16 +175,6 @@ namespace _41razmer
 
             OrderWindow orderWindow = new OrderWindow(selectedOrderProducts, selectedProducts, _currentUser);
             orderWindow.ShowDialog();
-
-            // После закрытия окна:
-            if (selectedProducts.Count == 0)
-            {
-                OrderBtn.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                OrderBtn.Visibility = Visibility.Visible;
-            }
         }
     }
 }

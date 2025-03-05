@@ -18,19 +18,14 @@ namespace _41razmer
     /// <summary>
     /// Логика взаимодействия для ProductPage.xaml
     /// </summary>
-    /// 
-
     public partial class ProductPage : Page
     {
-        List<Product> selectedProducts = new List<Product>();
-        List<OrderProduct> selectedOrderProducts = new List<OrderProduct>();
+        List<Product> Tablelist;
         int CountRecords;
-        private User _currentUser;
 
         public ProductPage(User user)
         {
             InitializeComponent();
-            _currentUser = user;
             if (user != null)
             {
                 FIOTB.Text = user.UserSurname + " " + user.UserName + " " + user.UserPatronymic;
@@ -53,7 +48,6 @@ namespace _41razmer
                 BeforeFIOTB.Text = "";
                 RoleTB.Text = "Гость";
             }
-            OrderBtn.Visibility = Visibility.Hidden;
             var currentProducts = Abdeev41Entities.GetContext().Product.ToList();
             ProductListView.ItemsSource = currentProducts;
             ComboDiscount.SelectedIndex = 0;
@@ -110,81 +104,10 @@ namespace _41razmer
             UpdateProduct();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            if(ProductListView.SelectedIndex >= 0)
-            {
-                var prod = ProductListView.SelectedItem as Product;
-                selectedProducts.Add(prod);
 
-                // Проверяем, существует ли уже OrderProduct для этого товара
-                var existingOP = selectedOrderProducts.FirstOrDefault(op => op.ProductArticleNumber == prod.ProductArticleNumber);
-
-                if (existingOP == null)
-                {
-                    // Создаем новый OrderProduct, если его нет
-                    var newOrderProd = new OrderProduct
-                    {
-                        ProductArticleNumber = prod.ProductArticleNumber,
-                        ProductCount = 1
-                    };
-                    selectedOrderProducts.Add(newOrderProd);
-                    ////newOrderProd.OrderID = newOrderID;
-                }
-                else
-                {
-                    // Увеличиваем количество, если товар уже есть в заказе
-                    existingOP.ProductCount++;
-                }
-
-                OrderBtn.Visibility = Visibility.Visible;
-                ProductListView.SelectedIndex = -1;
-
-            }
-        }
-
-        //private void OrderBtn_Click(object sender, RoutedEventArgs e)
+        //private void Button_Click(object sender, RoutedEventArgs e)
         //{
-        //    selectedProducts = selectedProducts.Distinct().ToList();
-        //    OrderWindow orderWindow = new OrderWindow(selectedOrderProducts, selectedProducts, _currentUser);
-        //    orderWindow.ShowDialog();
+        //    Manager.MainFrame.Navigate(new AddEditPage());
         //}
-
-        private void OrderBtn_Click(object sender, RoutedEventArgs e)
-        {
-            selectedProducts = selectedProducts.Distinct().ToList();
-
-            // Добавьте этот код для инициализации Quantity в Product
-            foreach (var product in selectedProducts)
-            {
-                // Находим соответствующий OrderProduct для текущего Product
-                var orderProduct = selectedOrderProducts.FirstOrDefault(op =>
-                    op.ProductArticleNumber == product.ProductArticleNumber);
-
-                if (orderProduct != null)
-                {
-                    // Устанавливаем Quantity в Product на основе ProductCount из OrderProduct
-                    product.Quantity = orderProduct.ProductCount;
-                }
-                else
-                {
-                    // Если OrderProduct не найден (хотя это маловероятно), устанавливаем значение по умолчанию
-                    product.Quantity = 1;
-                }
-            }
-
-            OrderWindow orderWindow = new OrderWindow(selectedOrderProducts, selectedProducts, _currentUser);
-            orderWindow.ShowDialog();
-
-            // После закрытия окна:
-            if (selectedProducts.Count == 0)
-            {
-                OrderBtn.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                OrderBtn.Visibility = Visibility.Visible;
-            }
-        }
     }
 }

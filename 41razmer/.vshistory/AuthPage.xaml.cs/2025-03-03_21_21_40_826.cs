@@ -31,7 +31,6 @@ namespace _41razmer
         {
             User user = null;
             Manager.MainFrame.Navigate(new ProductPage(user));
-            ResetForm();
         }
 
         string captcha;
@@ -58,9 +57,6 @@ namespace _41razmer
                 if (CaptchaTB.Text != captcha)
                 {
                     MessageBox.Show("Капча введена неверно!");
-                    SignInBtn.IsEnabled = false;
-                    await Task.Delay(10000);
-                    SignInBtn.IsEnabled = true;
                     return;
                 }
             }
@@ -105,7 +101,6 @@ namespace _41razmer
             captchaTwoChar.Text = "";
             captchaThreeChar.Text = "";
             captchaFourChar.Text = "";
-            countErrorAuth = 0;
         }
 
         private string GenerateCaptcha()
@@ -121,3 +116,4 @@ namespace _41razmer
         }
     }
 }
+

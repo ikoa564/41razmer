@@ -105,7 +105,6 @@ namespace _41razmer
             captchaTwoChar.Text = "";
             captchaThreeChar.Text = "";
             captchaFourChar.Text = "";
-            countErrorAuth = 0;
         }
 
         private string GenerateCaptcha()
@@ -121,3 +120,4 @@ namespace _41razmer
         }
     }
 }
+

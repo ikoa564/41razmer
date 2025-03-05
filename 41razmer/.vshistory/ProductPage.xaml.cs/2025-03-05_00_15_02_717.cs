@@ -117,29 +117,28 @@ namespace _41razmer
                 var prod = ProductListView.SelectedItem as Product;
                 selectedProducts.Add(prod);
 
-                // Проверяем, существует ли уже OrderProduct для этого товара
-                var existingOP = selectedOrderProducts.FirstOrDefault(op => op.ProductArticleNumber == prod.ProductArticleNumber);
+                var newOrderProd = new OrderProduct();
+                //newOrderProd.OrderID = newOrderID;
 
-                if (existingOP == null)
+                newOrderProd.ProductArticleNumber = prod.ProductArticleNumber;
+                newOrderProd.ProductCount = 1;
+
+                var selOP = selectedProducts.Where(p => Equals(p.ProductArticleNumber, prod.ProductArticleNumber));
+                if (selOP.Count() == 0)
                 {
-                    // Создаем новый OrderProduct, если его нет
-                    var newOrderProd = new OrderProduct
-                    {
-                        ProductArticleNumber = prod.ProductArticleNumber,
-                        ProductCount = 1
-                    };
                     selectedOrderProducts.Add(newOrderProd);
-                    ////newOrderProd.OrderID = newOrderID;
                 }
                 else
                 {
-                    // Увеличиваем количество, если товар уже есть в заказе
-                    existingOP.ProductCount++;
+                    foreach(OrderProduct p in selectedOrderProducts)
+                    {
+                        if (p.ProductArticleNumber == prod.ProductArticleNumber)
+                            p.ProductCount++;
+                    }
                 }
 
                 OrderBtn.Visibility = Visibility.Visible;
                 ProductListView.SelectedIndex = -1;
-
             }
         }
 
@@ -173,18 +172,15 @@ namespace _41razmer
                 }
             }
 
+            // Теперь создаем OrderWindow с передачей данных
             OrderWindow orderWindow = new OrderWindow(selectedOrderProducts, selectedProducts, _currentUser);
             orderWindow.ShowDialog();
-
-            // После закрытия окна:
-            if (selectedProducts.Count == 0)
-            {
-                OrderBtn.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                OrderBtn.Visibility = Visibility.Visible;
-            }
         }
+
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Manager.MainFrame.Navigate(new AddEditPage());
+        //}
     }
 }

@@ -52,8 +52,6 @@
                     <TextBlock>>15%</TextBlock>
                 </ComboBox>
             </StackPanel>
-
-            <Button Name="OrderBtn" Content="Просмотр заказа" Click="OrderBtn_Click"></Button>
         </WrapPanel>
 
         <ListView Grid.Row="2" Name="ProductListView" Grid.RowSpan="2">

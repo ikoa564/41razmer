@@ -129,7 +129,6 @@ namespace _41razmer
                         ProductCount = 1
                     };
                     selectedOrderProducts.Add(newOrderProd);
-                    ////newOrderProd.OrderID = newOrderID;
                 }
                 else
                 {
@@ -137,9 +136,32 @@ namespace _41razmer
                     existingOP.ProductCount++;
                 }
 
+                // Обновляем интерфейс
                 OrderBtn.Visibility = Visibility.Visible;
                 ProductListView.SelectedIndex = -1;
 
+                //var newOrderProd = new OrderProduct();
+                ////newOrderProd.OrderID = newOrderID;
+
+                //newOrderProd.ProductArticleNumber = prod.ProductArticleNumber;
+                //newOrderProd.ProductCount = 1;
+
+                //var selOP = selectedProducts.Where(p => Equals(p.ProductArticleNumber, prod.ProductArticleNumber));
+                //if (selOP.Count() == 0)
+                //{
+                //    selectedOrderProducts.Add(newOrderProd);
+                //}
+                //else
+                //{
+                //    foreach(OrderProduct p in selectedOrderProducts)
+                //    {
+                //        if (p.ProductArticleNumber == prod.ProductArticleNumber)
+                //            p.ProductCount++;
+                //    }
+                //}
+
+                //OrderBtn.Visibility = Visibility.Visible;
+                //ProductListView.SelectedIndex = -1;
             }
         }
 
@@ -175,16 +197,12 @@ namespace _41razmer
 
             OrderWindow orderWindow = new OrderWindow(selectedOrderProducts, selectedProducts, _currentUser);
             orderWindow.ShowDialog();
-
-            // После закрытия окна:
-            if (selectedProducts.Count == 0)
-            {
-                OrderBtn.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                OrderBtn.Visibility = Visibility.Visible;
-            }
         }
+
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Manager.MainFrame.Navigate(new AddEditPage());
+        //}
     }
 }

@@ -1,0 +1,32 @@
+﻿<Window x:Class="_41razmer.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_41razmer"
+        mc:Ignorable="d"
+        Title="OrderWindow" Height="450" Width="800" FontFamily="Comic Sans MS">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+    </Grid>
+
+    <TextBlock Grid.Row="0" Grid.Column="0" Text="Дата формирования заказа" FontSize="20" HorizontalAlignment="Left"></TextBlock>
+    <DatePicker Name="DateFormOrder" ></DatePicker>
+    <TextBlock Grid.Row="1" Grid.Column="0" Text="Дата доставки заказа" FontSize="20" HorizontalAlignment="Left"></TextBlock>
+    <TextBlock Grid.Row="2" Grid.Column="0" Text="ФИО клиента" FontSize="20" HorizontalAlignment="Left"></TextBlock>
+    <TextBlock Grid.Row="3" Grid.Column="0" Text="Номер заказа" FontSize="20" HorizontalAlignment="Left"></TextBlock>
+    <TextBlock Grid.Row="5" Grid.Column="0" Text="Пункт выдачи" FontSize="20" HorizontalAlignment="Left"></TextBlock>
+</Window>
