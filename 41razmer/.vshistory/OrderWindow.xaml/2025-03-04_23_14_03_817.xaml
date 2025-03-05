@@ -14,14 +14,13 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="42"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="270"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
+        
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Дата формирования заказа" FontSize="20" HorizontalAlignment="Left"></TextBlock>
         <DatePicker Grid.Row="0" Grid.Column="1" Name="DateFormOrder" SelectedDateChanged="DateFormOrder_SelectedDateChanged"></DatePicker>
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Дата доставки заказа" FontSize="20" HorizontalAlignment="Left"></TextBlock>
@@ -32,20 +31,8 @@
         <TextBlock Name="OrderIDTB" Grid.Row="3" Grid.Column="1" FontSize="20" HorizontalAlignment="Left"></TextBlock>
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Пункт выдачи" FontSize="20" HorizontalAlignment="Left"></TextBlock>
         <ComboBox Grid.Row="5" Grid.Column="1" Name="PickPointComboBox"></ComboBox>
-        <Button Name="SaveBtn" Content="Сохранить" Grid.Column="1" Grid.Row="7" Click="SaveBtn_Click"></Button>
+        <Button Name="SaveBtn" Content="Сохранить" Grid.Column="1" Grid.Row="6" Click="SaveBtn_Click"></Button>
 
-        <StackPanel Grid.Column="0" Grid.Row="6" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <TextBlock Text="Итоговая сумма:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left"/>
-            <TextBlock Name="TotalAmountTB" FontSize="20" Margin="10,0,0,0"/>
-
-            <TextBlock Text="Сумма со скидкой:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left"/>
-            <TextBlock Name="DiscountAmountTB" FontSize="20" Margin="10,0,0,0"/>
-
-            <TextBlock Text="Сумма скидки:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left"/>
-            <TextBlock Name="TotalDiscountAmountTB" FontSize="20" Margin="10,0,0,0"/>
-
-
-        </StackPanel>
         <ListView Grid.Row="4" Grid.Column="0" Name="ProductOrderListView" Grid.ColumnSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -101,7 +88,7 @@
 
             </ListView.ItemTemplate>
         </ListView>
-
+        
     </Grid>
 
 </Window>

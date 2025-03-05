@@ -31,7 +31,6 @@ namespace _41razmer
             InitializeComponent();
             _currentUser = user;
             //DateDeliveryOrder.IsEnabled = false;
-            //DateDeliveryOrder.IsEnabled = false;
             if (user != null)
                 FIOTB_Order.Text = user.UserSurname + " " + user.UserName + " " + user.UserPatronymic;
             else
@@ -113,7 +112,6 @@ namespace _41razmer
             }
             Abdeev41Entities.GetContext().SaveChanges();
             MessageBox.Show($"Заказ №{currentOrder.OrderID} сохранен! Код: {currentOrder.OrderCode}");
-            this.DialogResult = true;
             Close();
         }
 

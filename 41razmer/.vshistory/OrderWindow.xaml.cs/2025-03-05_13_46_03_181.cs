@@ -31,7 +31,6 @@ namespace _41razmer
             InitializeComponent();
             _currentUser = user;
             //DateDeliveryOrder.IsEnabled = false;
-            //DateDeliveryOrder.IsEnabled = false;
             if (user != null)
                 FIOTB_Order.Text = user.UserSurname + " " + user.UserName + " " + user.UserPatronymic;
             else
@@ -113,7 +112,6 @@ namespace _41razmer
             }
             Abdeev41Entities.GetContext().SaveChanges();
             MessageBox.Show($"Заказ №{currentOrder.OrderID} сохранен! Код: {currentOrder.OrderCode}");
-            this.DialogResult = true;
             Close();
         }
 
@@ -175,35 +173,49 @@ namespace _41razmer
                     // Перепривязываем данные, чтобы обновить интерфейс
                     ProductOrderListView.ItemsSource = null;
                     ProductOrderListView.ItemsSource = selectedProducts;
-                    SetDeliveryDate();
-                    CalculateTotalAndDiscount();
                     ProductOrderListView.Items.Refresh();
                 }
             }
         }
 
+        //private void SetDeliveryDate()
+        //{
+        //    bool hasLowStock = false; // Флаг для проверки наличия товаров <3 шт.
+
+        //    // Проверяем каждый продукт в заказе
+        //    foreach (var product in selectedProducts)
+        //    {
+        //        if (product.ProductQuantityInStock < 3) // Если количество на складе <3
+        //        {
+        //            hasLowStock = true;
+        //            break; // Выходим из цикла при первом нарушении
+        //        }
+        //    }
+
+        //    DateTime deliveryDate = DateFormOrder.SelectedDate.Value;
+        //    deliveryDate = hasLowStock
+        //        ? deliveryDate.AddDays(6) // Если есть товары <3 шт. → +6 дней
+        //        : deliveryDate.AddDays(3); // В противном случае → +3 дня
+
+        //    DateDeliveryOrder.SelectedDate = deliveryDate;
+        //}
+
         private void SetDeliveryDate()
         {
-            bool hasLowStock = false; // Флаг для проверки наличия товаров <3 шт.
-
-            // Проверяем каждый продукт в заказе
-            foreach (var product in selectedProducts)
+            // Проверка: есть ли товары с низким остатком (например, <= 10 штук)
+            bool hasLowStock = selectedOrderProducts.Any(op =>
             {
-                if (product.ProductQuantityInStock < 3) // Если количество на складе <3
-                {
-                    hasLowStock = true;
-                    break; // Выходим из цикла при первом нарушении
-                }
-            }
+                var product = selectedProducts.FirstOrDefault(p => p.ProductArticleNumber == op.ProductArticleNumber);
+                return product != null && product.ProductQuantityInStock <= 10;
+            });
 
-            DateTime deliveryDate = DateFormOrder.SelectedDate.Value;
-            deliveryDate = hasLowStock
-                ? deliveryDate.AddDays(6) // Если есть товары <3 шт. → +6 дней
-                : deliveryDate.AddDays(3); // В противном случае → +3 дня
+            // Вычисляем дату доставки
+            DateTime currentDate = DateTime.Now;
+            DateTime deliveryDate = currentDate.AddDays(hasLowStock ? 6 : 3);
 
+            // Устанавливаем дату в контроле DateDeliveryOrder
             DateDeliveryOrder.SelectedDate = deliveryDate;
         }
-
 
         private void DateFormOrder_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -225,7 +237,7 @@ namespace _41razmer
         private int GetNextOrderID()
         {
             var sqlCommand = "SELECT IDENT_CURRENT('Order')";
-            var nextID = Abdeev41Entities.GetContext().Database.SqlQuery<decimal>(sqlCommand).FirstOrDefault() + 1;
+            var nextID = Abdeev41Entities.GetContext().Database.SqlQuery<decimal>(sqlCommand).FirstOrDefault();
             return (int)nextID;
         }
 
@@ -233,29 +245,30 @@ namespace _41razmer
         {
             decimal total = 0;
             decimal discount = 0;
+            decimal discountedPrice = 0;
 
             foreach (var orderProduct in selectedOrderProducts)
             {
+                // Находим товар в списке selectedProducts по артикулу
                 var product = selectedProducts.FirstOrDefault(p => p.ProductArticleNumber == orderProduct.ProductArticleNumber);
                 if (product == null) continue;
 
+                // Получаем цену и скидку товара
                 decimal price = product.ProductCost;
-                decimal discountPercent = product.ProductDiscountAmount ?? 0;
+                decimal discountAmount = product.ProductDiscountAmount.Value;
 
-                // Сумма без скидки
+                // Рассчитываем стоимость товара с учетом скидки
+                discountedPrice = price * (discountAmount/100);
+
+                // Добавляем к итоговой сумме и сумме скидки
                 total += orderProduct.ProductCount * price;
-
-                // Сумма скидки для текущего товара
-                discount += orderProduct.ProductCount * price * (discountPercent / 100);
+                discount += orderProduct.ProductCount * (price - discountedPrice);
             }
 
-            // Итоговая сумма с учётом скидки
-            decimal discountedTotal = total - discount;
-
-            // Обновление отображения
+            // Обновляем отображение суммы и скидки
             TotalAmountTB.Text = total.ToString("N0") + " ₽ ";
             TotalDiscountAmountTB.Text = discount.ToString("N0") + " ₽ ";
-            DiscountAmountTB.Text = discountedTotal.ToString("N0") + " ₽";
+            DiscountAmountTB.Text = discountedPrice.ToString("N0") + " ₽ ";
         }
     }
 }

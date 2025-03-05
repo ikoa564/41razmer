@@ -38,12 +38,8 @@
             <TextBlock Text="Итоговая сумма:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left"/>
             <TextBlock Name="TotalAmountTB" FontSize="20" Margin="10,0,0,0"/>
 
-            <TextBlock Text="Сумма со скидкой:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left"/>
-            <TextBlock Name="DiscountAmountTB" FontSize="20" Margin="10,0,0,0"/>
-
             <TextBlock Text="Сумма скидки:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left"/>
-            <TextBlock Name="TotalDiscountAmountTB" FontSize="20" Margin="10,0,0,0"/>
-
+            <TextBlock Name="DiscountAmountTB" FontSize="20" Margin="10,0,0,0"/>
 
         </StackPanel>
         <ListView Grid.Row="4" Grid.Column="0" Name="ProductOrderListView" Grid.ColumnSpan="2">

@@ -31,7 +31,6 @@ namespace _41razmer
             InitializeComponent();
             _currentUser = user;
             //DateDeliveryOrder.IsEnabled = false;
-            //DateDeliveryOrder.IsEnabled = false;
             if (user != null)
                 FIOTB_Order.Text = user.UserSurname + " " + user.UserName + " " + user.UserPatronymic;
             else
@@ -113,7 +112,6 @@ namespace _41razmer
             }
             Abdeev41Entities.GetContext().SaveChanges();
             MessageBox.Show($"Заказ №{currentOrder.OrderID} сохранен! Код: {currentOrder.OrderCode}");
-            this.DialogResult = true;
             Close();
         }
 
@@ -175,8 +173,6 @@ namespace _41razmer
                     // Перепривязываем данные, чтобы обновить интерфейс
                     ProductOrderListView.ItemsSource = null;
                     ProductOrderListView.ItemsSource = selectedProducts;
-                    SetDeliveryDate();
-                    CalculateTotalAndDiscount();
                     ProductOrderListView.Items.Refresh();
                 }
             }
@@ -225,7 +221,7 @@ namespace _41razmer
         private int GetNextOrderID()
         {
             var sqlCommand = "SELECT IDENT_CURRENT('Order')";
-            var nextID = Abdeev41Entities.GetContext().Database.SqlQuery<decimal>(sqlCommand).FirstOrDefault() + 1;
+            var nextID = Abdeev41Entities.GetContext().Database.SqlQuery<decimal>(sqlCommand).FirstOrDefault();
             return (int)nextID;
         }
 
@@ -253,8 +249,8 @@ namespace _41razmer
             decimal discountedTotal = total - discount;
 
             // Обновление отображения
-            TotalAmountTB.Text = total.ToString("N0") + " ₽ ";
-            TotalDiscountAmountTB.Text = discount.ToString("N0") + " ₽ ";
+            TotalAmountTB.Text = total.ToString("N0") + " ₽";
+            TotalDiscountAmountTB.Text = discount.ToString("N0") + " ₽";
             DiscountAmountTB.Text = discountedTotal.ToString("N0") + " ₽";
         }
     }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,7 +29,6 @@ namespace _41razmer
         {
             InitializeComponent();
             _currentUser = user;
-            //DateDeliveryOrder.IsEnabled = false;
             //DateDeliveryOrder.IsEnabled = false;
             if (user != null)
                 FIOTB_Order.Text = user.UserSurname + " " + user.UserName + " " + user.UserPatronymic;
@@ -73,7 +71,6 @@ namespace _41razmer
             this.selectedProducts = selectedProducts;
             DateFormOrder.Text = DateTime.Now.ToString();
             SetDeliveryDate();
-            CalculateTotalAndDiscount();
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -95,7 +92,7 @@ namespace _41razmer
             if (_currentUser == null)
                 currentOrder.OrderClientID = null;
             else
-                currentOrder.OrderClientID = _currentUser.UserID;
+                currentOrder.OrderClientID = _currentUser.UserID; 
             currentOrder.OrderPickupPointID = PickPointComboBox.SelectedIndex + 1;
             currentOrder.OrderDate = DateFormOrder.SelectedDate.Value;
             currentOrder.OrderDeliveryDate = DateDeliveryOrder.SelectedDate.Value;
@@ -113,7 +110,6 @@ namespace _41razmer
             }
             Abdeev41Entities.GetContext().SaveChanges();
             MessageBox.Show($"Заказ №{currentOrder.OrderID} сохранен! Код: {currentOrder.OrderCode}");
-            this.DialogResult = true;
             Close();
         }
 
@@ -138,7 +134,6 @@ namespace _41razmer
                 selectedOP.ProductCount++;
                 prod.Quantity = selectedOP.ProductCount;
                 SetDeliveryDate();
-                CalculateTotalAndDiscount();
                 ProductOrderListView.Items.Refresh();
             }
         }
@@ -155,7 +150,6 @@ namespace _41razmer
                     selectedOP.ProductCount--;
                     prod.Quantity = selectedOP.ProductCount; // Синхронизируем Quantity
                     SetDeliveryDate();
-                    CalculateTotalAndDiscount();
                     ProductOrderListView.Items.Refresh();
                 }
                 else
@@ -175,8 +169,6 @@ namespace _41razmer
                     // Перепривязываем данные, чтобы обновить интерфейс
                     ProductOrderListView.ItemsSource = null;
                     ProductOrderListView.ItemsSource = selectedProducts;
-                    SetDeliveryDate();
-                    CalculateTotalAndDiscount();
                     ProductOrderListView.Items.Refresh();
                 }
             }
@@ -196,14 +188,15 @@ namespace _41razmer
                 }
             }
 
+            // Вычисляем дату доставки
             DateTime deliveryDate = DateFormOrder.SelectedDate.Value;
             deliveryDate = hasLowStock
                 ? deliveryDate.AddDays(6) // Если есть товары <3 шт. → +6 дней
                 : deliveryDate.AddDays(3); // В противном случае → +3 дня
 
+            // Устанавливаем дату в элемент DateDeliveryOrder (проверьте имя элемента в XAML)
             DateDeliveryOrder.SelectedDate = deliveryDate;
         }
-
 
         private void DateFormOrder_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -217,45 +210,19 @@ namespace _41razmer
             int code;
             do
             {
-                code = random.Next(100, 1000);
+                code = random.Next(100, 1000); // 100-999
             } while (context.Order.Any(o => o.OrderCode == code));
 
             return code;
         }
         private int GetNextOrderID()
         {
-            var sqlCommand = "SELECT IDENT_CURRENT('Order')";
-            var nextID = Abdeev41Entities.GetContext().Database.SqlQuery<decimal>(sqlCommand).FirstOrDefault() + 1;
-            return (int)nextID;
-        }
-
-        private void CalculateTotalAndDiscount()
-        {
-            decimal total = 0;
-            decimal discount = 0;
-
-            foreach (var orderProduct in selectedOrderProducts)
+            using (var context = Abdeev41Entities.GetContext())
             {
-                var product = selectedProducts.FirstOrDefault(p => p.ProductArticleNumber == orderProduct.ProductArticleNumber);
-                if (product == null) continue;
-
-                decimal price = product.ProductCost;
-                decimal discountPercent = product.ProductDiscountAmount ?? 0;
-
-                // Сумма без скидки
-                total += orderProduct.ProductCount * price;
-
-                // Сумма скидки для текущего товара
-                discount += orderProduct.ProductCount * price * (discountPercent / 100);
+                var sqlCommand = "SELECT IDENT_CURRENT('Order')";
+                var nextID = context.Database.SqlQuery<decimal>(sqlCommand).FirstOrDefault(); // Используем decimal вместо int
+                return (int)nextID; // Явное приведение к int
             }
-
-            // Итоговая сумма с учётом скидки
-            decimal discountedTotal = total - discount;
-
-            // Обновление отображения
-            TotalAmountTB.Text = total.ToString("N0") + " ₽ ";
-            TotalDiscountAmountTB.Text = discount.ToString("N0") + " ₽ ";
-            DiscountAmountTB.Text = discountedTotal.ToString("N0") + " ₽";
         }
     }
 }

@@ -174,30 +174,17 @@ namespace _41razmer
             }
 
             OrderWindow orderWindow = new OrderWindow(selectedOrderProducts, selectedProducts, _currentUser);
-            bool? result = orderWindow.ShowDialog();
+            orderWindow.ShowDialog();
 
-            // Если заказ успешно сохранен (DialogResult = true)
-            if (result == true)
+            // После закрытия окна:
+            if (selectedProducts.Count == 0)
             {
-                selectedProducts.Clear();
-                selectedOrderProducts.Clear();
-                ProductListView.Items.Refresh(); // Обновить отображение списка
+                OrderBtn.Visibility = Visibility.Hidden;
             }
-
-            // Обновить видимость кнопки
-            OrderBtn.Visibility = selectedProducts.Any() ? Visibility.Visible : Visibility.Hidden;
-
-            //orderWindow.ShowDialog();
-
-            //// После закрытия окна:
-            //if (selectedProducts.Count == 0)
-            //{
-            //    OrderBtn.Visibility = Visibility.Hidden;
-            //}
-            //else
-            //{
-            //    OrderBtn.Visibility = Visibility.Visible;
-            //}
+            else
+            {
+                OrderBtn.Visibility = Visibility.Visible;
+            }
         }
     }
 }
